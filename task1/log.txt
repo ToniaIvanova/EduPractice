@@ -1,0 +1,11 @@
+commit 04bbb4d1658c5e22027d40e2d1f6e1e705db752c
+Author: ToniaIvanova <tonia.ivanova@tut.by>
+Date:   Mon Feb 18 19:04:23 2019 +0300
+
+    add status.txt
+
+commit bac05f1ac5898dd95f5be57a09bfd9e613bbac83
+Author: ToniaIvanova <tonia.ivanova@tut.by>
+Date:   Mon Feb 18 19:02:10 2019 +0300
+
+    add.gitignore
