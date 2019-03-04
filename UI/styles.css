@@ -1,0 +1,139 @@
+.feed {
+	top: 0; left: 0;
+  	font-size: 20px;
+  	display: flex;  
+  	text-align: center;
+  	font-family: 'Caveat Brush';
+}
+.feed > * {
+  	padding: 10px;
+  	flex: 100%;
+}
+.header {
+	width: 100%;
+	position: fixed;
+	top: 0; left: 0;
+	text-align: left;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	background: white;
+	display: flex;
+}
+.portal_name {
+	width: 150px;
+	height: 40px;
+}
+.search {
+	display: flex;
+	margin-left: 40px;
+	padding: 7px;
+	width: 70%;
+	margin-right: 10px;
+}
+.search_fild {
+	margin-left: 10px;
+	margin-right: 160px;
+	height: 20px;
+	width: 70%;
+}
+.madnifier {
+	display: none;
+	width: 25px;
+	height: 25px;
+}
+.button {
+	background: lightgreen; 
+	position: fixed; 
+	padding: 1px;
+	margin: 0px;
+	right: 0;
+	width: 120px;
+	font-family: 'Caveat Brush';
+	font-size: 20px;
+}
+.button_log {
+  	top: 32px;
+}
+.button_sign {
+	top: 0;
+}
+.curtain 	{
+	display: none;
+	background: lightgreen;
+}
+.main {
+ 	margin: 73px 10px 0px 10px;
+  	text-align: center;
+  	background:rgb(241, 243, 223);
+	box-shadow: 0 0 10px rgb(131, 95, 95);
+	height: fit-content;
+  	display: flex; 
+}
+.main > * {
+ 	padding: 10px;
+  	flex: 100%;
+}
+.column_feed {
+	flex-direction: column-reverse;
+}
+.column_feed > *{
+	flex: 100%;
+}
+.img_feed {
+	width: 100%;
+}
+.post {
+	background:lightgreen;
+	display: flex;
+	height: fit-content;
+	flex-direction: column;
+	margin-bottom: 10px;
+	padding: 3px;
+	box-shadow: 0 0 10px rgb(131, 95, 95);
+}
+.prof_information {
+	display: flex;
+}
+.post_information {
+	flex: 100%;
+}
+.img_small {
+	width: 60px;
+	height: 60px;
+	margin: 0px 10px 10px 0px; 
+}
+.profname_date{
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	font-size: 20px;
+	width: 100%;
+}
+.button_edit {
+	height: 20px;
+}
+.post_text_like {
+	display: flex;
+	margin-top: 10px;
+}
+.like {
+	width: 30px;
+	height: 30px;
+}
+.text {
+	margin-left: 10px;
+}
+
+.footer {
+	background: lightgreen; 
+	position: fixed; 
+  	left: 9px; bottom: 0;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+
+@media all and (min-width: 1560px) {
+  .curtain { flex: 1; display: flex;}
+  .main  { flex: 8 }
+  .madnifier {display: flex;}
+}
