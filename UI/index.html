@@ -3,123 +3,49 @@
 <head>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Caveat+Brush">
 	<link rel="stylesheet" href="styles.css">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<meta charset="utf-8">
 </head>
 <body>
+<script defer src="script.js"></script>
 
 <div class="feed">
   <header class="header">
-	<img class="portal_name" src="https://i.imgur.com/ux9THml.png" alt="TONE"></img>
-	<div class="search">
-	  <img class="madnifier" src="https://i.imgur.com/d6tEYbU.png"></img>
-	  <input class="search_fild" placeholder="Search #BSU"></input>
-	</div>	
-	<button class="button button_sign" type="button">Sign in</button>
-	<button class="button button_log" type="button">Log in</button>
+		<img class="portal_name" src="https://i.imgur.com/ux9THml.png" alt="TONE"></img>
+		<div class="search">
+		  <img class="madnifier" src="https://i.imgur.com/d6tEYbU.png"></img>
+		  <input class="search_fild" placeholder="Search #BSU"></input>
+		</div>	
+		<button class="button button_sign" type="button">Sign in</button>
+		<button class="button button_log" type="button">Log in</button>
+		<div class="profile">
+			<img class="prof_login_img img_small" src="https://i.imgur.com/fSRvMf1.jpg?1"></img>
+			<div class="name_logout">
+				<a class="link_prof" href="https://vk.com/tonia.ivanova">Tonia Ivanova</a>
+				<button class="button button_logout" type="button">Log Out</button>
+			</div>
+			<button class="button button_new_post" type="button">New Post</button>
+		</div>
   </header>
 
   <aside class="curtain"></aside>
   
   <div class="main">
-
-    <div class="column_feed">
-	   <div class="post">
-			<div class="prof_information">
-				<img class="img_small" src="https://i.imgur.com/fSRvMf1.jpg?1"></img>
-				<div class="profname_date">
-					<a class="link_prof" href="https://vk.com/tonia.ivanova"> Tonia Ivanova </a>
-					<span class="date_post"> 01.04.2018</span>
-				</div>
-				<button class="button_edit" type="button" title="Edit">...</button>
-			</div>
-			<img class="img_feed" src="https://i.imgur.com/rUjL28x.jpg"></img>
-			<div class="post_text_like">
-				<a class="like">
-					<img class="like" src="https://i.imgur.com/5rN9V2h.jpg"></img>
-				</a>
-				<span class="text">Very Beautiful hause.</span>
-			</div>
-	   </div>
-	   <div class="post">
-			<div class="prof_information">
-				<img class="img_small" src="https://i.imgur.com/fSRvMf1.jpg?1"></img>
-				<div class="profname_date">
-					<a class="link_prof" href="https://vk.com/tonia.ivanova"> Tonia Ivanova </a>
-					<span class="date_post"> 02.04.2018</span>
-				</div>
-				<button class="button_edit" type="button" title="Edit">...</button>
-			</div>
-			<img class="img_feed" src="https://i.imgur.com/J4BevtL.jpg"></img>
-			<div class="post_text_like">
-				<a class="like">
-					<img class="like" src="https://i.imgur.com/5rN9V2h.jpg"></img>
-				</a>
-				<span class="text">Very Beautiful hause too!</span>
-			</div>
-	   </div>
-	</div>
-
-	<div class="column_feed">
-		<div class="post">
-			<div class="prof_information">
-				<img class="img_small" src="https://i.imgur.com/fSRvMf1.jpg?1"></img>
-				<div class="profname_date">
-					<a class="link_prof" href="https://vk.com/tonia.ivanova"> Tonia Ivanova </a>
-					<span class="date_post"> 09.02.2018</span>
-				</div>
-				<button class="button_edit" type="button" title="Edit">...</button>
-			</div>
-			<img class="img_feed" src="https://pp.userapi.com/c844418/v844418988/1590af/t1gOJnsPT-o.jpg"></img>
-			<div class="post_text_like">
-				<a class="like">
-					<img class="like" src="https://i.imgur.com/5rN9V2h.jpg"></img>
-				</a>
-				<span class="text">It's me ;)</span>
-			</div>
+		<div class="column_feed column_first">
+		</div>
+		<div class="column_feed column_second">
+		</div>
+		<div class="column_feed column_third">
 		</div>
 	</div>
-
-	<div class="column_feed">
-		<div class="post">
-			<div class="prof_information">
-				<img class="img_small" src="https://i.imgur.com/fSRvMf1.jpg?1"></img>
-				<div class="profname_date">
-					<a class="link_prof" href="https://vk.com/tonia.ivanova"> Tonia Ivanova </a>
-					<span class="date_post"> 17.02.2018</span>
-				</div>
-				<button class="button_edit" type="button" title="Edit">...</button>
-			</div>
-			<img class="img_feed" src="https://i.imgur.com/ltu5QKR.png"></img>
-			<div class="post_text_like">
-				<a class="like">
-					<img class="like" src="https://i.imgur.com/5rN9V2h.jpg"></img>
-				</a>
-				<span class="text"></span>
-			</div>
-		</div>
-		<div class="post">
-			<div class="prof_information">
-				<img class="img_small" src="https://i.imgur.com/fSRvMf1.jpg?1"></img>
-				<div class="profname_date">
-					<a class="link_prof" href="https://vk.com/tonia.ivanova"> Tonia Ivanova </a>
-					<span class="date_post"> 17.02.2018</span>
-				</div>
-				<button class="button_edit" type="button" title="Edit">...</button>
-			</div>
-			<img class="img_feed" src="https://i.imgur.com/vpMrYuL.png"></img>
-			<div class="post_text_like">
-				<a class="like">
-					<img class="like" src="https://i.imgur.com/5rN9V2h.jpg"></img>
-				</a>
-				<span class="text">He wants candy!</span>
-			</div>
-		</div>
-	</div>
-		
-  </div>
-  
+	<button class="button button_load_more" type="button">Load more</button>
+	  
   <aside class="curtain"></aside>
-	
-  <footer class="footer"><b>TONE</b><br>Ivanova Antonina<br>2 course 6 group<br>tonia.ivanova@tut.by<br>02.03.2019</footer>
+  <footer class="footer"><b>TONE</b><br>Ivanova Antonina<br>2 course 6 group<br>tonia.ivanova@tut.by<br>19.03.2019</footer>
+</div>
+<div class="black_window">
+		<div class="black_window_inner">
+		</div>
 </div>
 <!---->
 </body>

@@ -3,7 +3,7 @@
   	font-size: 20px;
   	display: flex;  
   	text-align: center;
-  	font-family: 'Caveat Brush';
+	font-family: 'Caveat Brush';	
 }
 .feed > * {
   	padding: 10px;
@@ -43,18 +43,42 @@
 .button {
 	background: lightgreen; 
 	position: fixed; 
-	padding: 1px;
 	margin: 0px;
-	right: 0;
 	width: 120px;
 	font-family: 'Caveat Brush';
 	font-size: 20px;
 }
 .button_log {
+	display: none;
+	right: 0;
   	top: 32px;
 }
 .button_sign {
+	display: none;
+	right: 0;
 	top: 0;
+}
+.button_load_more {
+	right: 30px;
+	bottom: 30px;
+	display: inline;
+	background:rgb(241, 243, 223);
+	box-shadow: 0 0 10px rgb(131, 95, 95);
+}
+.button_new_post {
+	position: static;
+	margin: 0 0 0 30px;
+}
+.profile {
+	display: flex;
+	width: 500px;
+}
+.name_logout {
+	display: flex;
+	flex-direction: column-reverse;
+}
+.name_logout > * {
+	flex: 100%;
 }
 .curtain 	{
 	display: none;
@@ -66,7 +90,7 @@
   	background:rgb(241, 243, 223);
 	box-shadow: 0 0 10px rgb(131, 95, 95);
 	height: fit-content;
-  	display: flex; 
+	display: flex; 
 }
 .main > * {
  	padding: 10px;
@@ -99,7 +123,16 @@
 .img_small {
 	width: 60px;
 	height: 60px;
-	margin: 0px 10px 10px 0px; 
+	margin: 0px; 
+}
+.img_big {
+	height: 100%;
+}
+.post_big {
+	padding: 50px 20px 50px 100px;
+	overflow: auto;
+	display: flex;
+
 }
 .profname_date{
 	display: flex;
@@ -115,14 +148,23 @@
 	display: flex;
 	margin-top: 10px;
 }
-.like {
+.img_like {
 	width: 30px;
 	height: 30px;
+}
+.button_like {
+		height: fit-content;
+	width: fit-content;
+	padding: 0px;
 }
 .text {
 	margin-left: 10px;
 }
-
+.text_big_photo {
+	color: green;
+	font-size: 30px;
+	font-family: 'Caveat Brush';
+}
 .footer {
 	background: lightgreen; 
 	position: fixed; 
@@ -131,9 +173,46 @@
 	margin-bottom: 10px;
 }
 
-
 @media all and (min-width: 1560px) {
   .curtain { flex: 1; display: flex;}
   .main  { flex: 8 }
   .madnifier {display: flex;}
+}
+
+.black_window {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	display: none;
+}
+.black_window_inner {
+	background: rgba(0, 0, 0, 0.8);
+	display: fixed;
+	height: 100%;
+	width: 100%;
+}
+
+.desc_like {
+	padding: 10px 50px 10px 50px;
+}
+.button_close{
+	top: 50px;
+	right: 50px;
+	position: fixed;
+	height: fit-content;
+	width: fit-content;
+	padding: 0px;
+}
+.edit_input{
+	margin: 10px;
+	height: 30px;
+	font-size: 20px;
+}
+.edit_hashtags{
+	margin: 10px;
+	height: 30px;
+	font-size: 20px;
 }
