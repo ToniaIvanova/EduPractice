@@ -159,6 +159,7 @@
 }
 .text {
 	margin-left: 10px;
+	font-family: 'Caveat Brush';  
 }
 .text_big_photo {
 	color: green;
@@ -210,9 +211,11 @@
 	margin: 10px;
 	height: 30px;
 	font-size: 20px;
+	font-family: 'Caveat Brush';
 }
 .edit_hashtags{
 	margin: 10px;
 	height: 30px;
 	font-size: 20px;
+	font-family: 'Caveat Brush';
 }
