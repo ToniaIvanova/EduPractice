@@ -123,7 +123,7 @@
             post.classList.add("post_big");
             const img = document.createElement("img");
             img.classList.add("img_big");
-            if (str == "new"){
+            if (str === "new"){
                 img.style.background = "lightgreen";
             }
             else{
@@ -142,12 +142,12 @@
             img_like.src = "https://i.imgur.com/5rN9V2h.jpg";
             like.appendChild(img_like);
             let text;
-            if (str == "edit"){
+            if (str === "edit"){
                 text = document.createElement("input");
                 text.classList.add("edit_input");
                 text.value = this.get_post(id).description;
             }
-            else if(str == "new"){
+            else if(str === "new"){
                 text = document.createElement("input");
                 text.classList.add("edit_input");
                 text.placeholder = "Write the description";
@@ -159,28 +159,33 @@
             }
             desc_like.appendChild(like);
             desc_like.appendChild(text);
-            if (str == "edit" || str == "new"){
+            if (str === "edit" || str === "new"){
                 text = document.createElement("input");
                 text.classList.add("edit_hashtags");
-                if (str == "edit"){
+                if (str === "edit"){
                     text.value = this.get_post(id).hashtags;
                 }
                 else{
                     text.placeholder = "Write the hashtags (not displayed)";
                 }
                 desc_like.appendChild(text);
-                if (str == "edit"){
+                if (str === "edit"){
                     const but_del = document.createElement("button");
-                    but_del.classList.add("button");  
+                    but_del.classList.add("button", "button_delete");  
                     but_del.innerText = "Delete";
                     but_del.type = "button";
+                    but_del.onclick = () => {
+                        this.remove_post(id);
+                        console.log(this.posts);
+                        console.log(id);
+                    }
                     desc_like.appendChild(but_del);          
                 }
                 const but = document.createElement("button");
+                but.classList.add("button"); 
                 but.type = "button";
-                but.classList.add("button");
                 but.innerHTML = "Save";
-                if (str == "edit"){
+                if (str === "edit"){
                     but.onclick = () => {
                         const text = document.getElementsByClassName("edit_input")[0];
                         const hashtags = document.getElementsByClassName("edit_hashtags")[0];
@@ -221,7 +226,7 @@
         }
         edit_post(id, text, hashtags){
             this.posts.forEach((value) => {
-                if (value.id == id){
+                if (value.id === id){
                     let post = document.getElementById(id);
                     post = post.getElementsByClassName("post_text_like")[0];
                     post = post.getElementsByClassName("text")[0];
@@ -234,7 +239,7 @@
         get_post(id){
             let temp;
             this.posts.forEach((value) => {
-                if (value.id == id){
+                if (value.id === id){
                     temp = value;
                 }
             });
@@ -257,16 +262,26 @@
             return false;
         }
         remove_post(id){
-            posts.forEach((value) => {
-                if (value.id == id){
-                    delete this.posts[value];
-                    from = 0;
-                    to = 5;
-                    this.load();
+            let new_posts = [];
+            this.posts.forEach((value) => {
+                if (value.id != id){
+                    new_posts.push(value);
                 }
             });
+            from = 0;
+            to = 5;
+            this.posts = new_posts;
+            this.new_feed();
+            this.new_window_close();
+            this.load();
         }
-
+        new_feed(){
+            const feed = document.getElementsByClassName("column_feed");
+            [0, 1, 2].forEach((i) => {
+                feed[i].innerHTML = null;
+                heights_col[i] = 0;
+            });
+        }
     }
     
     const p = [
