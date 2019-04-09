@@ -1,10 +1,10 @@
 (function(){
     class PostsList{
-        constructor(p){
+        constructor(){
             this.posts = [];
         }
         addAll(p){
-            const not_valid = [];
+            let not_valid = [];
             p.forEach((value) => {
                 if (this.is_valid(value)){
                     this.posts.splice(this.posts.length, 0, value);
@@ -176,8 +176,6 @@
                     but_del.type = "button";
                     but_del.onclick = () => {
                         this.remove_post(id);
-                        console.log(this.posts);
-                        console.log(id);
                     }
                     desc_like.appendChild(but_del);          
                 }
@@ -231,10 +229,12 @@
                     post = post.getElementsByClassName("post_text_like")[0];
                     post = post.getElementsByClassName("text")[0];
                     post.innerText = text;
-                    post.description = text;
+                    value.description = text;
                     value.hashtags = hashtags;
                 }
             });
+            
+            localStorage["data"] = JSON.stringify(this);
         }  
         get_post(id){
             let temp;
@@ -257,6 +257,7 @@
             }
             if (this.is_valid(post)){
                 this.posts.splice(this.posts.length, 0, post);
+                localStorage["data"] = JSON.stringify(this);
                 return true;
             }
             return false;
@@ -270,10 +271,18 @@
             });
             from = 0;
             to = 5;
-            this.posts = new_posts;
+            if (this.posts.length > to){
+                this.load_valid();
+            }
+            
+            this.clear();
+            this.addAll(new_posts);
+            localStorage["data"] = JSON.stringify(this);
+
             this.new_feed();
             this.new_window_close();
             this.load();
+
         }
         new_feed(){
             const feed = document.getElementsByClassName("column_feed");
@@ -282,17 +291,20 @@
                 heights_col[i] = 0;
             });
         }
-    }
+        clear(){
+            this.posts = [];
+        }
+    };
     
     const p = [
         {
-            id: "1",
-            description: "Very beautiful house",
-            date: new Date("2018-02-17T13:11:00"),
-            author: "Tonia Ivanova",
-            author_link: "https://vk.com/tonia.ivanova",
-            link: "https://i.imgur.com/rUjL28x.jpg",
-            hashtags: "#BSU"
+            "id": "1",
+            "description": "Very beautiful house",
+            "date": new Date("2018-02-17T13:11:00"),
+            "author": "Tonia Ivanova",
+            "author_link": "https://vk.com/tonia.ivanova",
+            "link": "https://i.imgur.com/rUjL28x.jpg",
+            "hashtags": "#BSU"
         },
         {
             id: "2",
@@ -420,16 +432,26 @@
             link: "https://i.imgur.com/vpMrYuL.png",
             hashtags: ""
         },
-    ]
-    const pos = new PostsList(p); 
-    pos.addAll(p);
+    ];
+
+    let pos = new PostsList();
+    let json = localStorage.getItem("data");
+    if (json === null){
+        pos.addAll(p);
+        localStorage.setItem("data", JSON.stringify(pos));
+    }
+    else{
+        pos.addAll(JSON.parse(json).posts);
+    }
+    console.log(pos);
+    
     let from = 0;
     let to = 5;
     const heights_col = [];
     heights_col[0] = document.body.getElementsByClassName("column_feed")[0].clientHeight;
     heights_col[1] = document.body.getElementsByClassName("column_feed")[1].clientHeight;
     heights_col[2] = document.body.getElementsByClassName("column_feed")[2].clientHeight;
-    pos.load(from, to);
+    pos.load();
     
     const but_load_more = document.getElementsByClassName("button_load_more")[0];
     but_load_more.onclick = () => {
