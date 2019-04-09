@@ -295,6 +295,72 @@
             this.posts = [];
         }
     };
+    class View{
+        header(){
+            const head = document.getElementsByClassName("header")[0];
+
+            const port_name = document.createElement("img");
+            port_name.classList.add("portal_name");
+            port_name.src = "https://i.imgur.com/ux9THml.png";
+            port_name.alt = "TONE";
+
+            const search = document.createElement("div");
+            search.classList.add("search");
+            const madnifier = document.createElement("img");
+            madnifier.classList.add("madnifier");
+            madnifier.src = "https://i.imgur.com/d6tEYbU.png";
+            const search_fild = document.createElement("input");
+            search_fild.classList.add("search_fild");
+            search_fild.placeholder = "Search #BSU";
+            search.appendChild(madnifier);
+            search.appendChild(search_fild);
+
+            const but_sign = document.createElement("button");
+            but_sign.classList.add("button", "button_sign");
+            but_sign.type = "button";
+            but_sign.innerText = "Sign In";
+            const but_login = document.createElement("button");
+            but_login.classList.add("button", "button_log");
+            but_login.type = "button";
+            but_login.innerText = "Log In";
+
+            const profile = document.createElement("div");
+            profile.classList.add("profile");
+            const img_prof = document.createElement("img");
+            img_prof.classList.add("prof_login_img", "img_small");
+            img_prof.src = "https://i.imgur.com/fSRvMf1.jpg?1";
+            
+            const name_logout = document.createElement("div");
+            name_logout.classList.add("name_logout");
+            const link_prof = document.createElement("a");
+            link_prof.classList.add("link_prof");
+            link_prof.href = "https://vk.com/tonia.ivanova";
+            link_prof.innerText = "Tonia Ivanova";
+            const but_logout = document.createElement("button");
+            but_logout.classList.add("button", "button_logout");
+            but_logout.type = "button";
+            but_logout.innerText = "Log Out";
+            name_logout.appendChild(link_prof);
+            name_logout.appendChild(but_logout);
+
+            const but_new = document.createElement("button");
+            but_new.classList.add("button", "button_new_post");
+            but_new.type = "button";
+            but_new.innerText = "New Post";
+
+            profile.appendChild(img_prof);
+            profile.appendChild(name_logout);
+            profile.appendChild(but_new);
+
+            head.appendChild(port_name);
+            head.appendChild(search);
+            head.appendChild(but_sign);
+            head.appendChild(but_login);
+            head.appendChild(profile);
+        }
+    }
+    let view = new View();
+    view.header();
     
     const p = [
         {
