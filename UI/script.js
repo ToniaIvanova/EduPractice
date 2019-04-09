@@ -15,15 +15,8 @@
             });
             return not_valid;
         }
-        load_more_none(){
-            const temp = document.getElementsByClassName("button_load_more")[0];
-            if (to >= this.posts.length){
-                temp.style.display = "none";
-                to = this.posts.length;
-            }
-        }
         load(){  
-            this.load_more_none();
+            view.load_more_not_valid();
             for (let i = from; i < to; i++){
                 let value = this.posts[i];
                 const post = document.createElement("div");
@@ -54,7 +47,10 @@
                 editBut.innerText = "...";
                 editBut.title = "Edit";
                 editBut.onclick = () => {
-                    this.img_window(value.id, "edit");
+                    view.black_window_go(value.id, "edit");
+                }
+                if (login === "none"){
+                    editBut.style.display = "none";
                 }
                 inform.appendChild(img_prof);
                 inform.appendChild(prof_date);
@@ -64,7 +60,7 @@
                 img.classList.add("img_feed");
                 img.src = value.link;
                 img.onclick = () => {
-                    this.img_window(value.id);
+                    view.black_window_go(value.id);
                 }
 
                 const desc_like = document.createElement("div");
@@ -112,115 +108,6 @@
                     return true;
             }
             return false; 
-        }
-        img_window(id, str){
-            const black = document.getElementsByClassName("black_window")[0];
-            black.style.display = "block";
-            const black_inner = black.getElementsByClassName("black_window_inner")[0];
-            black_inner.innerHTML = "";
-
-            const post = document.createElement("div");
-            post.classList.add("post_big");
-            const img = document.createElement("img");
-            img.classList.add("img_big");
-            if (str === "new"){
-                img.style.background = "lightgreen";
-            }
-            else{
-                img.src = this.get_post(id).link;
-            }
-            img.style.maxHeight = "700px";
-            post.appendChild(img);
-            
-            const desc_like = document.createElement("div");
-            desc_like.classList.add("desc_like");
-            const like = document.createElement("button");
-            like.type = "button";                
-            like.classList.add("button_like");
-            const img_like = document.createElement("img");
-            img_like.classList.add("img_like");
-            img_like.src = "https://i.imgur.com/5rN9V2h.jpg";
-            like.appendChild(img_like);
-            let text;
-            if (str === "edit"){
-                text = document.createElement("input");
-                text.classList.add("edit_input");
-                text.value = this.get_post(id).description;
-            }
-            else if(str === "new"){
-                text = document.createElement("input");
-                text.classList.add("edit_input");
-                text.placeholder = "Write the description";
-            }
-            else{
-                text = document.createElement("span");
-                text.classList.add("text_big_photo");
-                text.innerText = this.get_post(id).description;
-            }
-            desc_like.appendChild(like);
-            desc_like.appendChild(text);
-            if (str === "edit" || str === "new"){
-                text = document.createElement("input");
-                text.classList.add("edit_hashtags");
-                if (str === "edit"){
-                    text.value = this.get_post(id).hashtags;
-                }
-                else{
-                    text.placeholder = "Write the hashtags (not displayed)";
-                }
-                desc_like.appendChild(text);
-                if (str === "edit"){
-                    const but_del = document.createElement("button");
-                    but_del.classList.add("button", "button_delete");  
-                    but_del.innerText = "Delete";
-                    but_del.type = "button";
-                    but_del.onclick = () => {
-                        this.remove_post(id);
-                    }
-                    desc_like.appendChild(but_del);          
-                }
-                const but = document.createElement("button");
-                but.classList.add("button"); 
-                but.type = "button";
-                but.innerHTML = "Save";
-                if (str === "edit"){
-                    but.onclick = () => {
-                        const text = document.getElementsByClassName("edit_input")[0];
-                        const hashtags = document.getElementsByClassName("edit_hashtags")[0];
-                        this.edit_post(id, text.value, hashtags.value);
-                        this.new_window_close();
-                    }
-                }
-                else{
-                    but.onclick = () => {
-                        const text = document.getElementsByClassName("edit_input")[0].value;
-                        const hashtags = document.getElementsByClassName("edit_hashtags")[0].value;
-                        this.add_post(this.posts.length, text, hashtags);
-                        this.load_valid();
-                        this.new_window_close();
-                    }
-                }
-                desc_like.appendChild(but);
-            }
-            post.appendChild(desc_like);
-            black_inner.appendChild(post);
-            const close = document.createElement("button");
-            close.classList.add("button_close");
-            close.type = "button";
-            close.onclick = this.new_window_close;
-            const img_close = document.createElement("img");
-            img_close.classList.add("img_small");
-            img_close.src = "https://i.imgur.com/u2zrMTr.jpg";
-            close.appendChild(img_close);
-            black_inner.appendChild(close);
-        }
-        load_valid(){
-            const but_load = document.getElementsByClassName("button_load_more")[0];
-            but_load.style.display = "block";
-        }
-        new_window_close(){
-            const black = document.getElementsByClassName("black_window")[0];
-            black.style.display = "none";
         }
         edit_post(id, text, hashtags){
             this.posts.forEach((value) => {
@@ -272,29 +159,23 @@
             from = 0;
             to = 5;
             if (this.posts.length > to){
-                this.load_valid();
+                view.load_more_valid();
             }
             
             this.clear();
             this.addAll(new_posts);
             localStorage["data"] = JSON.stringify(this);
 
-            this.new_feed();
-            this.new_window_close();
+            view.new_feed();
+            view.black_window_close();
             this.load();
 
-        }
-        new_feed(){
-            const feed = document.getElementsByClassName("column_feed");
-            [0, 1, 2].forEach((i) => {
-                feed[i].innerHTML = null;
-                heights_col[i] = 0;
-            });
         }
         clear(){
             this.posts = [];
         }
     };
+
     class View{
         header(){
             const head = document.getElementsByClassName("header")[0];
@@ -358,10 +239,184 @@
             head.appendChild(but_login);
             head.appendChild(profile);
         }
+        new_feed(){
+            const feed = document.getElementsByClassName("column_feed");
+            [0, 1, 2].forEach((i) => {
+                feed[i].innerHTML = null;
+                heights_col[i] = 0;
+            });
+        }
+        black_window_close(){
+            const black = document.getElementsByClassName("black_window")[0];
+            black.style.display = "none";
+        }
+        black_window_go(id, what){
+            const black = document.getElementsByClassName("black_window")[0];
+            black.style.display = "block";
+            const black_inner = black.getElementsByClassName("black_window_inner")[0];
+            black_inner.innerHTML = "";
+            
+            const post = document.createElement("div");
+            post.classList.add("post_big");
+            switch(what){
+                case "edit":{
+                    this.view_edit(id, post);
+                    break;
+                }
+                case "new":{
+                    this.view_new(post);
+                    break;
+                }
+                default:{
+                    this.view_photo(id, post);
+                }
+            }
+            black_inner.appendChild(post);
+            const close = document.createElement("button");
+            close.classList.add("button_close");
+            close.type = "button";
+            close.onclick = view.black_window_close;
+            const img_close = document.createElement("img");
+            img_close.classList.add("img_small");
+            img_close.src = "https://i.imgur.com/u2zrMTr.jpg";
+            close.appendChild(img_close);
+            black_inner.appendChild(close);
+        }
+        view_photo(id, post){
+            const img = document.createElement("img");
+            img.classList.add("img_big");
+            img.src = pos.get_post(id).link;
+            img.style.maxHeight = "700px";
+            post.appendChild(img);
+
+            const desc_like = document.createElement("div");
+            desc_like.classList.add("desc_like");
+            const like = document.createElement("button");
+            like.type = "button";                
+            like.classList.add("button_like");
+            const img_like = document.createElement("img");
+            img_like.classList.add("img_like");
+            img_like.src = "https://i.imgur.com/5rN9V2h.jpg";
+            like.appendChild(img_like);
+            let text = document.createElement("span");
+            text.classList.add("text_big_photo");
+            text.innerText = pos.get_post(id).description;
+
+            desc_like.appendChild(like);
+            desc_like.appendChild(text);
+
+            post.appendChild(desc_like);
+        }
+        view_edit(id, post){
+            const img = document.createElement("img");
+            img.classList.add("img_big");
+            img.src = pos.get_post(id).link;
+            img.style.maxHeight = "700px";
+            post.appendChild(img);
+
+            const desc_like = document.createElement("div");
+            desc_like.classList.add("desc_like");
+            const like = document.createElement("button");
+            like.type = "button";                
+            like.classList.add("button_like");
+            const img_like = document.createElement("img");
+            img_like.classList.add("img_like");
+            img_like.src = "https://i.imgur.com/5rN9V2h.jpg";
+            like.appendChild(img_like);
+            const text = document.createElement("input");
+            text.classList.add("edit_input");
+            text.value = pos.get_post(id).description;
+
+            desc_like.appendChild(like);
+            desc_like.appendChild(text);
+
+            const hashtags = document.createElement("input");
+            hashtags.classList.add("edit_hashtags");
+            hashtags.value = pos.get_post(id).hashtags;
+            desc_like.appendChild(hashtags);
+
+            const but_del = document.createElement("button");
+            but_del.classList.add("button", "button_delete");  
+            but_del.innerText = "Delete";
+            but_del.type = "button";
+            but_del.onclick = () => {
+                pos.remove_post(id);
+            }
+            desc_like.appendChild(but_del);   
+            
+            const but = document.createElement("button");
+            but.classList.add("button"); 
+            but.type = "button";
+            but.innerHTML = "Save";
+            but.onclick = () => {
+                const text = document.getElementsByClassName("edit_input")[0];
+                const hashtags = document.getElementsByClassName("edit_hashtags")[0];
+                pos.edit_post(id, text.value, hashtags.value);
+                this.black_window_close();
+            }
+            desc_like.appendChild(but);
+
+            post.appendChild(desc_like);
+        }
+        view_new(post){
+            const img = document.createElement("img");
+            img.classList.add("img_big");
+            img.style.background = "lightgreen";
+            img.style.maxHeight = "700px";
+            post.appendChild(img);
+
+            const desc_like = document.createElement("div");
+            desc_like.classList.add("desc_like");
+            const like = document.createElement("button");
+            like.type = "button";                
+            like.classList.add("button_like");
+            const img_like = document.createElement("img");
+            img_like.classList.add("img_like");
+            img_like.src = "https://i.imgur.com/5rN9V2h.jpg";
+            like.appendChild(img_like);
+            let text = document.createElement("input");
+            text.classList.add("edit_input");
+            text.placeholder = "Write the description";
+
+            desc_like.appendChild(like);
+            desc_like.appendChild(text);
+
+            text = document.createElement("input");
+            text.classList.add("edit_hashtags");
+            text.placeholder = "Write the hashtags (not displayed)";
+            desc_like.appendChild(text);
+
+            const but = document.createElement("button");
+            but.classList.add("button"); 
+            but.type = "button";
+            but.innerHTML = "Save";
+            but.onclick = () => {
+                const text = document.getElementsByClassName("edit_input")[0].value;
+                const hashtags = document.getElementsByClassName("edit_hashtags")[0].value;
+                pos.add_post(this.posts.length, text, hashtags);
+                this.load_more_valid();
+                this.black_window_close();
+            }
+            desc_like.appendChild(but);
+
+            post.appendChild(desc_like);
+        }
+        load_more_valid(){
+            const but_load = document.getElementsByClassName("button_load_more")[0];
+            but_load.style.display = "block";
+        }
+        load_more_not_valid(){
+            const temp = document.getElementsByClassName("button_load_more")[0];
+            if (to >= pos.posts.length){
+                temp.style.display = "none";
+                to = pos.posts.length;
+            }
+        }
     }
     let view = new View();
     view.header();
     
+
     const p = [
         {
             "id": "1",
@@ -499,17 +554,27 @@
             hashtags: ""
         },
     ];
-
     let pos = new PostsList();
-    let json = localStorage.getItem("data");
-    if (json === null){
+    let json_posts = localStorage.getItem("data");
+    if (json_posts === null){
         pos.addAll(p);
         localStorage.setItem("data", JSON.stringify(pos));
     }
     else{
-        pos.addAll(JSON.parse(json).posts);
+        pos.addAll(JSON.parse(json_posts).posts);
     }
-    console.log(pos);
+
+    let login;
+    let json_login = localStorage.getItem("login");
+    if (json_login === null || json_login === "none"){
+        document.getElementsByClassName("button_log")[0].style.display = "block"; 
+        document.getElementsByClassName("button_sign")[0].style.display = "block"; 
+        document.getElementsByClassName("profile")[0].style.display = "none"; 
+        login = "none";
+    }
+    else{
+        login = json_login;
+    }
     
     let from = 0;
     let to = 5;
@@ -526,6 +591,37 @@
 
     let add = document.getElementsByClassName("button_new_post")[0];
     add.onclick = () => {
-        pos.img_window(pos.length, "new");
+        view.black_window_go(pos.length, "new");
+    }
+
+    let sign_in = document.getElementsByClassName("button_sign")[0];
+    sign_in.onclick = () => {
+
+    }
+
+    let log_in = document.getElementsByClassName("button_log")[0];
+    log_in.onclick = () => {
+        document.getElementsByClassName("button_log")[0].style.display = "none"; 
+        document.getElementsByClassName("button_sign")[0].style.display = "none"; 
+        document.getElementsByClassName("profile")[0].style.display = "flex"; 
+        login = "Tonia Ivanova";
+        localStorage["login"] = "Tonia Ivanova";
+        from = 0;
+        to = 5;
+        view.new_feed();
+        pos.load();
+    }
+
+    let log_out = document.getElementsByClassName("button_logout")[0];
+    log_out.onclick = () => {
+        document.getElementsByClassName("button_log")[0].style.display = "block"; 
+        document.getElementsByClassName("button_sign")[0].style.display = "block"; 
+        document.getElementsByClassName("profile")[0].style.display = "none"; 
+        login = "none";
+        localStorage["login"] = "none";
+        from = 0;
+        to = 5;
+        view.new_feed();
+        pos.load();
     }
 })();
