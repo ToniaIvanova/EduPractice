@@ -66,8 +66,9 @@
 	box-shadow: 0 0 10px rgb(131, 95, 95);
 }
 .button_new_post {
-	position: static;
-	margin: 0 0 0 30px;
+	top: 10px;
+    right: 20px;
+    height: 60px;
 }
 .profile {
 	display: flex;
@@ -120,10 +121,12 @@
 .post_information {
 	flex: 100%;
 }
+
 .img_small {
 	width: 60px;
 	height: 60px;
-	margin: 0px; 
+	margin: 3px; 
+	border-radius: 100%;
 }
 .img_big {
 	height: 100%;
@@ -191,7 +194,6 @@
 }
 .black_window_inner {
 	background: rgba(0, 0, 0, 0.8);
-	display: fixed;
 	height: 100%;
 	width: 100%;
 }
@@ -206,6 +208,7 @@
 	height: fit-content;
 	width: fit-content;
 	padding: 0px;
+	border-radius: 100%;
 }
 .edit_input{
 	margin: 10px;
@@ -222,4 +225,38 @@
 
 .button_delete{
 	display: flex;
+}
+
+.log_in{
+	padding: 20%;
+	display: flex;
+	flex-direction: column;
+}
+
+.login_input{
+	height: 30px;
+	font-family: "Caveat Brush";
+	font-size: 20px;
+	margin: 10px;
+}
+
+.password_input{
+	height: 30px;
+	font-family: "Caveat Brush";
+	font-size: 20px;
+	margin: 10px;
+}
+
+.but_log_in{
+	position: unset;
+	margin: 10px;
+}
+
+.error_login{
+	font-family: "Caveat Brush";
+	font-size: 20px;
+	margin: 10px;
+	display: none;
+	color: red;
+	background-color: lightgreen; 
 }
