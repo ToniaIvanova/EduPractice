@@ -1,0 +1,1 @@
+SELECT * FROM photo_portal.photo_post WHERE creation_date = '2017-05-09' limit 1;
